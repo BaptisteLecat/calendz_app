@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:calendz_app/data/entity/profile/profile.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
@@ -13,6 +14,8 @@ class User {
   final String? avatar;
   final bool? created;
   final String? token;
+  final Profile? appleProfile;
+  final Profile? googleProfile;
   const User({
     this.uid,
     this.lastname,
@@ -21,6 +24,8 @@ class User {
     this.avatar,
     this.created,
     this.token,
+    this.appleProfile,
+    this.googleProfile,
   });
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
@@ -51,18 +56,26 @@ class User {
       'avatar': avatar,
       'created': created,
       'token': token,
+      'appleProfile': appleProfile?.toMap(),
+      'googleProfile': googleProfile?.toMap(),
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      uid: map['uid']?.toInt(),
+      uid: map['uid'],
       lastname: map['lastname'],
       firstname: map['firstname'],
       email: map['email'],
       avatar: map['avatar'],
       created: map['created'],
       token: map['token'],
+      appleProfile: map['appleProfile'] != null
+          ? Profile.fromMap(map['appleProfile'])
+          : null,
+      googleProfile: map['googleProfile'] != null
+          ? Profile.fromMap(map['googleProfile'])
+          : null,
     );
   }
 }

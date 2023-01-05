@@ -14,6 +14,12 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       avatar: json['avatar'] as String?,
       created: json['created'] as bool?,
       token: json['token'] as String?,
+      appleProfile: json['appleProfile'] == null
+          ? null
+          : Profile.fromJson(json['appleProfile'] as Map<String, dynamic>),
+      googleProfile: json['googleProfile'] == null
+          ? null
+          : Profile.fromJson(json['googleProfile'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -24,4 +30,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'avatar': instance.avatar,
       'created': instance.created,
       'token': instance.token,
+      'appleProfile': instance.appleProfile,
+      'googleProfile': instance.googleProfile,
     };

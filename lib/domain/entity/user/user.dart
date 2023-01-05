@@ -1,3 +1,4 @@
+import 'package:calendz_app/domain/entity/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:calendz_app/data/entity/user/user.dart' as data;
@@ -16,6 +17,8 @@ class User with _$User {
     bool? created,
     String? token,
     @JsonKey(ignore: true) firebase.User? firebaseUser,
+    Profile? appleProfile,
+    Profile? googleProfile,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

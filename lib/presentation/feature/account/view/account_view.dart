@@ -1,5 +1,7 @@
 import 'package:calendz_app/constants/constants.dart';
+import 'package:calendz_app/presentation/app/bloc/app_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,42 +12,93 @@ class AccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ListView(
-        children: [
-          const SizedBox(height: 20),
-          SocialAccountWidget(
-              content: Text("baptiste.lecat44@gmail.com",
-                  style: Theme.of(context).textTheme.bodyText1),
-              icon: SvgPicture.asset(
-                "assets/svg/google.svg",
-                height: 26,
-              ),
-              action: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.delete,
-                  size: 28,
-                ),
-                color: const Color(0xFFE57373),
-              )),
-          SocialAccountWidget(
-              isLinked: false,
-              content: Text("Se connecter avec Apple",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Color.fromARGB(255, 182, 182, 182))),
-              icon: SvgPicture.asset("assets/svg/apple.svg",
-                  height: 26, color: blackColor),
-              action: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Iconsax.add5,
-                  size: 28,
-                ),
-                color: Theme.of(context).iconTheme.color,
-              ))
-        ],
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          return ListView(
+            children: [
+              const SizedBox(height: 20),
+              SocialAccountWidget(
+                  isLinked: state.authUser != null &&
+                      state.authUser!.googleProfile != null,
+                  content: Text(
+                      (state.authUser != null &&
+                              state.authUser!.googleProfile != null)
+                          ? "${state.authUser!.googleProfile!.email}"
+                          : "Se connecter avec Google",
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          color: (state.authUser != null &&
+                                  state.authUser!.googleProfile != null)
+                              ? null
+                              : Color.fromARGB(255, 182, 182, 182))),
+                  icon: SvgPicture.asset(
+                    "assets/svg/google.svg",
+                    height: 26,
+                    color: (state.authUser != null &&
+                            state.authUser!.googleProfile != null)
+                        ? null
+                        : blackColor,
+                  ),
+                  action: (state.authUser != null &&
+                          state.authUser!.googleProfile != null)
+                      ? IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.delete,
+                            size: 28,
+                          ),
+                          color: const Color(0xFFE57373),
+                        )
+                      : IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Iconsax.add5,
+                            size: 28,
+                          ),
+                          color: Theme.of(context).iconTheme.color,
+                        )),
+              SocialAccountWidget(
+                  isLinked: state.authUser != null &&
+                      state.authUser!.appleProfile != null,
+                  content: Text(
+                      (state.authUser != null &&
+                              state.authUser!.appleProfile != null)
+                          //Display the email with "..." at the end if it's too long.
+                          ? "${state.authUser!.appleProfile!.email!.length > 30 ? state.authUser!.appleProfile!.email!.substring(0, 30) + "..." : state.authUser!.appleProfile!.email}"
+                          : "Se connecter avec Apple",
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          color: (state.authUser != null &&
+                                  state.authUser!.appleProfile != null)
+                              ? null
+                              : Color.fromARGB(255, 182, 182, 182))),
+                  icon: SvgPicture.asset(
+                    "assets/svg/apple.svg",
+                    height: 26,
+                    color: (state.authUser != null &&
+                            state.authUser!.appleProfile != null)
+                        ? null
+                        : blackColor,
+                  ),
+                  action: (state.authUser != null &&
+                          state.authUser!.appleProfile != null)
+                      ? IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.delete,
+                            size: 28,
+                          ),
+                          color: const Color(0xFFE57373),
+                        )
+                      : IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Iconsax.add5,
+                            size: 28,
+                          ),
+                          color: Theme.of(context).iconTheme.color,
+                        )),
+            ],
+          );
+        },
       ),
     );
   }

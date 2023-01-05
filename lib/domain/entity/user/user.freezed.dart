@@ -29,6 +29,8 @@ mixin _$User {
   String? get token => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   firebase.User? get firebaseUser => throw _privateConstructorUsedError;
+  Profile? get appleProfile => throw _privateConstructorUsedError;
+  Profile? get googleProfile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +50,12 @@ abstract class $UserCopyWith<$Res> {
       String? avatar,
       bool? created,
       String? token,
-      @JsonKey(ignore: true) firebase.User? firebaseUser});
+      @JsonKey(ignore: true) firebase.User? firebaseUser,
+      Profile? appleProfile,
+      Profile? googleProfile});
+
+  $ProfileCopyWith<$Res>? get appleProfile;
+  $ProfileCopyWith<$Res>? get googleProfile;
 }
 
 /// @nodoc
@@ -72,6 +79,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? created = freezed,
     Object? token = freezed,
     Object? firebaseUser = freezed,
+    Object? appleProfile = freezed,
+    Object? googleProfile = freezed,
   }) {
     return _then(_value.copyWith(
       uid: freezed == uid
@@ -106,7 +115,39 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.firebaseUser
           : firebaseUser // ignore: cast_nullable_to_non_nullable
               as firebase.User?,
+      appleProfile: freezed == appleProfile
+          ? _value.appleProfile
+          : appleProfile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
+      googleProfile: freezed == googleProfile
+          ? _value.googleProfile
+          : googleProfile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get appleProfile {
+    if (_value.appleProfile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.appleProfile!, (value) {
+      return _then(_value.copyWith(appleProfile: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get googleProfile {
+    if (_value.googleProfile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.googleProfile!, (value) {
+      return _then(_value.copyWith(googleProfile: value) as $Val);
+    });
   }
 }
 
@@ -124,7 +165,14 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? avatar,
       bool? created,
       String? token,
-      @JsonKey(ignore: true) firebase.User? firebaseUser});
+      @JsonKey(ignore: true) firebase.User? firebaseUser,
+      Profile? appleProfile,
+      Profile? googleProfile});
+
+  @override
+  $ProfileCopyWith<$Res>? get appleProfile;
+  @override
+  $ProfileCopyWith<$Res>? get googleProfile;
 }
 
 /// @nodoc
@@ -144,6 +192,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? created = freezed,
     Object? token = freezed,
     Object? firebaseUser = freezed,
+    Object? appleProfile = freezed,
+    Object? googleProfile = freezed,
   }) {
     return _then(_$_User(
       uid: freezed == uid
@@ -178,6 +228,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.firebaseUser
           : firebaseUser // ignore: cast_nullable_to_non_nullable
               as firebase.User?,
+      appleProfile: freezed == appleProfile
+          ? _value.appleProfile
+          : appleProfile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
+      googleProfile: freezed == googleProfile
+          ? _value.googleProfile
+          : googleProfile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
     ));
   }
 }
@@ -193,7 +251,9 @@ class _$_User extends _User {
       this.avatar,
       this.created,
       this.token,
-      @JsonKey(ignore: true) this.firebaseUser})
+      @JsonKey(ignore: true) this.firebaseUser,
+      this.appleProfile,
+      this.googleProfile})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -215,10 +275,14 @@ class _$_User extends _User {
   @override
   @JsonKey(ignore: true)
   final firebase.User? firebaseUser;
+  @override
+  final Profile? appleProfile;
+  @override
+  final Profile? googleProfile;
 
   @override
   String toString() {
-    return 'User(uid: $uid, lastname: $lastname, firstname: $firstname, email: $email, avatar: $avatar, created: $created, token: $token, firebaseUser: $firebaseUser)';
+    return 'User(uid: $uid, lastname: $lastname, firstname: $firstname, email: $email, avatar: $avatar, created: $created, token: $token, firebaseUser: $firebaseUser, appleProfile: $appleProfile, googleProfile: $googleProfile)';
   }
 
   @override
@@ -236,13 +300,17 @@ class _$_User extends _User {
             (identical(other.created, created) || other.created == created) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.firebaseUser, firebaseUser) ||
-                other.firebaseUser == firebaseUser));
+                other.firebaseUser == firebaseUser) &&
+            (identical(other.appleProfile, appleProfile) ||
+                other.appleProfile == appleProfile) &&
+            (identical(other.googleProfile, googleProfile) ||
+                other.googleProfile == googleProfile));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, uid, lastname, firstname, email,
-      avatar, created, token, firebaseUser);
+      avatar, created, token, firebaseUser, appleProfile, googleProfile);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +335,9 @@ abstract class _User extends User {
       final String? avatar,
       final bool? created,
       final String? token,
-      @JsonKey(ignore: true) final firebase.User? firebaseUser}) = _$_User;
+      @JsonKey(ignore: true) final firebase.User? firebaseUser,
+      final Profile? appleProfile,
+      final Profile? googleProfile}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -289,6 +359,10 @@ abstract class _User extends User {
   @override
   @JsonKey(ignore: true)
   firebase.User? get firebaseUser;
+  @override
+  Profile? get appleProfile;
+  @override
+  Profile? get googleProfile;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
