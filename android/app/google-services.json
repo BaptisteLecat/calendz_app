@@ -29,6 +29,13 @@
             {
               "client_id": "429052372556-gf6b6c1kmrbm176k40fl03uvu8khnah1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "429052372556-lmgm7hnjsjlq211j5ckbipsjep2r2no5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.calendzApp"
+              }
             }
           ]
         }

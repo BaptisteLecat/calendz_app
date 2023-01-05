@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthService {
   static FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
@@ -75,6 +76,35 @@ class AuthService {
     }
 
     return user;
+  }
+
+  Future<User?> signInWithApple() async {
+    // 1. perform the sign-in request
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+    final oAuthProvider = OAuthProvider('apple.com');
+    final credential = oAuthProvider.credential(
+      idToken: appleCredential.identityToken!,
+      accessToken: appleCredential.authorizationCode,
+    );
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    final firebaseUser = userCredential.user!;
+    if (appleCredential.givenName != null &&
+        appleCredential.familyName != null) {
+      final displayName =
+          '${appleCredential.givenName} ${appleCredential.familyName}';
+      await firebaseUser.updateDisplayName(displayName);
+    }
+    if (appleCredential.email != null) {
+      final email = appleCredential.email!;
+      await firebaseUser.updateEmail(email);
+    }
+    return firebaseUser;
   }
 
   Future<void> signOut() async {

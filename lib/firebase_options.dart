@@ -66,11 +66,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCSrOi9LcuKkElew_r3f3tmTjtzsb9SXkA',
-    appId: '1:429052372556:ios:8591a5d85bc404dfd176e9',
+    appId: '1:429052372556:ios:ac325c883669af9ed176e9',
     messagingSenderId: '429052372556',
     projectId: 'calendz-app',
     storageBucket: 'calendz-app.appspot.com',
-    iosClientId: '429052372556-lmgm7hnjsjlq211j5ckbipsjep2r2no5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.calendzApp',
+    iosClientId: '429052372556-3ov4i0aap05rio8uc2b2vtjj78mkspnu.apps.googleusercontent.com',
+    iosBundleId: 'com.calendz.app',
   );
 }
