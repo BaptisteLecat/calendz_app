@@ -29,9 +29,10 @@ class SecondaryProductCard extends StatelessWidget {
       onPressed: () {},
       style: style ??
           OutlinedButton.styleFrom(
-              minimumSize: const Size(256, 114),
-              maximumSize: const Size(256, 114),
-              padding: const EdgeInsets.all(8)),
+            minimumSize: const Size(256, 114),
+            maximumSize: const Size(256, 114),
+            padding: const EdgeInsets.all(16),
+          ),
       child: Row(
         children: [
           AspectRatio(

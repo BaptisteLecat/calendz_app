@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:calendz_app/presentation/feature/account/screen/account_screen.dart';
 import 'package:calendz_app/presentation/feature/auth/views/done_profile_setup_screen.dart';
 import 'package:calendz_app/presentation/feature/auth/views/login_screen.dart';
 import 'package:calendz_app/presentation/feature/auth/views/on_boarding_screen.dart';
@@ -9,6 +10,10 @@ import 'package:calendz_app/presentation/feature/auth/views/signup_screen.dart';
 import 'package:calendz_app/presentation/feature/auth/views/terms_of_services_screen.dart';
 import 'package:calendz_app/presentation/feature/auth/views/verification_method_screen.dart';
 import 'package:calendz_app/presentation/feature/home/screen/home_screen.dart';
+import 'package:calendz_app/presentation/feature/notification/view/enable_notification_screen.dart';
+import 'package:calendz_app/presentation/feature/notification/view/notification_ontions_screen.dart';
+import 'package:calendz_app/presentation/feature/support/views/get_help_screen.dart';
+import 'package:calendz_app/presentation/feature/user_info/views/user_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +32,14 @@ enum AppRoute {
   signUpVerification(
       path: '/signUpVerification', screen: SignUpVerificationScreen()),
 
+  userInfo(path: '/userInfo', screen: UserInfoScreen()),
+  enableNotification(
+      path: '/enableNotification', screen: EnableNotificationScreen()),
+  notificationsOption(
+      path: '/notificationsOption', screen: NotificationOptionsScreen()),
+  getHelp(path: '/getHelp', screen: GetHelpScreen()),
+  associatedAccounts(path: '/associatedAccounts', screen: AccountScreen()),
+
   home(path: '/home');
 
   final String path;
@@ -38,8 +51,15 @@ enum AppRoute {
     return [
       GoRoute(
         name: AppRoute.home.name,
-        path: AppRoute.home.path,
-        builder: (context, state) => HomeScreen(),
+        path: '${AppRoute.home.path}/:index',
+        builder: (_, state) {
+          return HomeScreen(
+            key: state.pageKey,
+            index: (state.params['index'] != null)
+                ? int.parse(state.params['index'] as String)
+                : 0,
+          );
+        },
       ),
       GoRoute(
         name: AppRoute.onbording.name,
@@ -86,6 +106,31 @@ enum AppRoute {
         name: AppRoute.signup.name,
         path: AppRoute.signup.path,
         builder: (context, state) => AppRoute.signup.screen!,
+      ),
+      GoRoute(
+        name: AppRoute.userInfo.name,
+        path: AppRoute.userInfo.path,
+        builder: (context, state) => AppRoute.userInfo.screen!,
+      ),
+      GoRoute(
+        name: AppRoute.enableNotification.name,
+        path: AppRoute.enableNotification.path,
+        builder: (context, state) => AppRoute.enableNotification.screen!,
+      ),
+      GoRoute(
+        name: AppRoute.notificationsOption.name,
+        path: AppRoute.notificationsOption.path,
+        builder: (context, state) => AppRoute.notificationsOption.screen!,
+      ),
+      GoRoute(
+        name: AppRoute.getHelp.name,
+        path: AppRoute.getHelp.path,
+        builder: (context, state) => AppRoute.getHelp.screen!,
+      ),
+      GoRoute(
+        name: AppRoute.associatedAccounts.name,
+        path: AppRoute.associatedAccounts.path,
+        builder: (context, state) => AppRoute.associatedAccounts.screen!,
       ),
     ];
   }

@@ -65,7 +65,8 @@ class _AppRootState extends State<AppRoot> {
                 if ((!goingFromHome && !goingFromRegister) || goingFromLogin) {
                   _userBloc.add(
                       UserFetchOne(id: appBloc.state.authUser!.uid ?? "0"));
-                  return state.namedLocation(AppRoute.home.name);
+                  return state.namedLocation(AppRoute.home.name,
+                      params: {"index": "0"});
                 } else {
                   return null;
                 }
